@@ -38,33 +38,46 @@
 	.buttons .red  {
 		background: #c55757;
 	}
+	.buttons .colored  {
+		background: rgb(107,42,138);
+background: -moz-linear-gradient(left, rgba(107,42,138,1) 0%, rgba(189,187,6,1) 100%);
+background: -webkit-linear-gradient(left, rgba(107,42,138,1) 0%,rgba(189,187,6,1) 100%);
+background: linear-gradient(to right, rgba(107,42,138,1) 0%,rgba(189,187,6,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', endColorstr='#bdbb06',GradientType=1 );
+	}
 	</style>
 	<script>
 
-		 function changeColor(newColor1,newColor2) {
+		 function changeColor(newColor1,newColor2,newColor3) {
 			var svgParent = document.getElementById("Layer_1");
 			var st4 = svgParent.getElementsByClassName("st4");
 			var st5 = svgParent.getElementsByClassName("st5");
+			var st2 = svgParent.getElementsByClassName("st2");
 			var i;
+			
 			for (var i = 0; i < st4.length; i++) {
 			  st4[i].style.fill = newColor1;
 			}
 			for (var i = 0; i < st5.length; i++) {
 			  st5[i].style.fill = newColor2;
 			}
+			for (var i = 0; i < st2.length; i++) {
+			  st2[i].style.fill = newColor3;
+			}
 		  }
 	</script>
 </head>
 <body>
 	<h1>This is demo version.  </h1>
-	<p>See browser support here <a target="_blank" href="https://caniuse.com/#search=mix-blend-mode">https://caniuse.com/#search=mix-blend-mode</a>
+	<p>See browser support here <a target="_blank" href="https://caniuse.com/#search=mix-blend-mode">https://caniuse.com/#search=mix-blend-mode</a><br/>
 	<a target="_blank" href="https://caniuse.com/#search=mask-image">https://caniuse.com/#search=mask-image</a>
 	<br>
 	</p>
 	<div class="buttons">
-		<button class="green" onclick="changeColor('#04713c','#053515');">Green</button>&nbsp;
-		<button class="red" onclick="changeColor('#c55757','#7d4856');">Red</button>&nbsp;
-		<button class="original" onclick="changeColor('#7D91AC','#475C79');">Original</button>
+		<button class="green" onclick="changeColor('#04713c','#053515','#e6a439');">Green</button>&nbsp;
+		<button class="red" onclick="changeColor('#c55757','#7d4856','#885400');">Red</button>&nbsp;
+		<button class="colored" onclick="changeColor('#6b2a8a','#bdbb06','#447ca7');">Colored</button>
+		<button class="original" onclick="changeColor('#7D91AC','#475C79','#B55627');">Original</button>
 	</div>
 	
 	<div class="img-wrap">
