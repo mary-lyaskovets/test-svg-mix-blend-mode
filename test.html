@@ -4,6 +4,12 @@
 <title>CSS Template</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
+    </script> 
+<script src= 
+"https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"> 
+    </script> 
 	<style>
 	body {oveflow-x: hidden;}
 	.img-wrap {
@@ -11,8 +17,9 @@
 		position: relative;
 		height: 791px;
 		width: 729px;
-		mask-image: url(over.svg);
-		-webkit-mask-image: url(over.svg);
+		overflow: hidden;
+		/*mask-image: url(over.svg);
+		-webkit-mask-image: url(over.svg);*/
 	}
 	.img-wrap #Layer_1{
 		position: absolute;
@@ -45,27 +52,18 @@ background: -webkit-linear-gradient(left, rgba(107,42,138,1) 0%,rgba(189,187,6,1
 background: linear-gradient(to right, rgba(107,42,138,1) 0%,rgba(189,187,6,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', endColorstr='#bdbb06',GradientType=1 );
 	}
+	.buttons .print {
+		background: black; color: #fff;
+	}
+	
+	#demo {
+		height: 200px;
+		width: 200px;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+	}
 	</style>
-	<script>
-
-		 function changeColor(newColor1,newColor2,newColor3) {
-			var svgParent = document.getElementById("Layer_1");
-			var st4 = svgParent.getElementsByClassName("st4");
-			var st5 = svgParent.getElementsByClassName("st5");
-			var st2 = svgParent.getElementsByClassName("st2");
-			var i;
-			
-			for (var i = 0; i < st4.length; i++) {
-			  st4[i].style.fill = newColor1;
-			}
-			for (var i = 0; i < st5.length; i++) {
-			  st5[i].style.fill = newColor2;
-			}
-			for (var i = 0; i < st2.length; i++) {
-			  st2[i].style.fill = newColor3;
-			}
-		  }
-	</script>
+	
 </head>
 <body>
 	<h1>This is demo version.  </h1>
@@ -78,10 +76,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
 		<button class="red" onclick="changeColor('#c55757','#7d4856','#885400');">Red</button>&nbsp;
 		<button class="colored" onclick="changeColor('#6b2a8a','#bdbb06','#447ca7');">Colored</button>
 		<button class="original" onclick="changeColor('#7D91AC','#475C79','#B55627');">Original</button>
+		<!--<button class="print" onclick="print();">PRINT</button>-->
 	</div>
-	
-	<div class="img-wrap">
-		<img src='bigknit-2000x2000.jpg'/>
+	<style>
+	#Layer_1 { mix-blend-mode: multiply; }
+	</style>
+	<div class="img-wrap" id="img-wrap">
+
+		<img src='bigknit-2000x2000.jpg' id='img'/>
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 729 791" style="enable-background:new 0 0 729 791;" xml:space="preserve">
 <style type="text/css">
@@ -348,5 +350,169 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
 </svg>
 
 	</div>
+	<!--<div id="demo">
+	</div>
+	<canvas id="canvas"></canvas>
+	<iframe id="iframe"></iframe>-->
+	
+	
+	
+	<input id="btn-Preview-Image" type="button"
+                value="Preview" />  
+          
+    <a id="btn-Convert-Html2Image" href="#"> 
+        Download 
+    </a> 
+  
+    <br/> 
+      
+    <h3>Preview :</h3> 
+      
+    <div id="previewImage"></div> 
+	
+<script>
+
+		 function changeColor(newColor1,newColor2,newColor3) {
+			var svgParent = document.getElementById("Layer_1");
+			var st4 = svgParent.getElementsByClassName("st4");
+			var st5 = svgParent.getElementsByClassName("st5");
+			var st2 = svgParent.getElementsByClassName("st2");
+			var i;
+			
+			for (var i = 0; i < st4.length; i++) {
+			  st4[i].style.fill = newColor1;
+			}
+			for (var i = 0; i < st5.length; i++) {
+			  st5[i].style.fill = newColor2;
+			}
+			for (var i = 0; i < st2.length; i++) {
+			  st2[i].style.fill = newColor3;
+			}
+		  }
+		  
+		  function print() {
+			var demo = document.getElementById('demo');
+			var svg = document.getElementsByTagName('svg')[0];
+			var img = document.getElementsByTagName('img')[0];
+
+			// Convert the SVG node to HTML.
+			var div = document.createElement('img');
+			div.appendChild(svg.cloneNode(true));
+			div.appendChild(img.cloneNode(true));
+
+			// Encode the SVG as base64
+			var b64 = 'data:image/png;base64,'+window.btoa(svg.innerHTML);
+			var url = "<img src='" + b64 + "'/>";
+			div.src = url;
+			demo.innerHTML = url;
+			
+			
+			
+			var SVGDomElement = document.getElementsByTagName('svg')[0];
+
+			// 2. Serialize element into plain SVG
+			var serializedSVG = new XMLSerializer().serializeToString(SVGDomElement);
+
+			// 3. convert svg to base64
+			var base64Data = window.btoa(serializedSVG);
+			// The generated string will be something like: 
+			// PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdm.........
+
+			// If you want to display it in the browser via URL:
+			console.log("data:image/svg+xml;base64," + base64Data);
+			demo.innerHTML =  "<img src='data:image/svg+xml;base64," + base64Data + "'/>";
+			//demo.innerHTML =  document.querySelector('.img-wrap img').cloneNode(true);
+			
+		}
+		
+		/*function render_html_to_canvas(html, ctx, x, y, width, height) {
+		  var data = "data:image/svg+xml;charset=utf-8," + '<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '">' +
+			'<foreignObject width="100%" height="100%">' +
+			html_to_xml(html) +
+			'</foreignObject>' +
+			'</svg>';
+
+		  var img = new Image();
+		  img.onload = function() {
+			ctx.drawImage(img, x, y);
+		  }
+		  img.src = data;
+		}
+
+		function html_to_xml(html) {
+		  var doc = document.implementation.createHTMLDocument('');
+		  doc.write(html);
+
+		  // You must manually set the xmlns if you intend to immediately serialize     
+		  // the HTML document to a string as opposed to appending it to a
+		  // <foreignObject> in the DOM
+		  doc.documentElement.setAttribute('xmlns', doc.documentElement.namespaceURI);
+
+		  // Get well-formed markup
+		  html = (new XMLSerializer).serializeToString(doc.body);
+		  return html;
+		}
+		render_html_to_canvas(document.getElementById('img').innerHTML,0,0,200,200); */
+		
+	/*window.onload = function() {
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+
+			var data = '<iframe>' +
+			  document.getElementById('img-wrap').innerHTML +
+			  '</iframe>';
+
+			var DOMURL = window.URL || window.webkitURL || window;
+
+			var img = new Image();
+			var svg = new Blob([data]);
+			var url = DOMURL.createObjectURL(svg);
+
+			img.onload = function() {
+			  ctx.drawImage(img, 0, 0);
+			  DOMURL.revokeObjectURL(url);
+			}
+
+			img.src = url;
+		};*/
+		
+		
+		
+		 $(document).ready(function() { 
+          
+            // Global variable 
+            var element = $("#img-wrap");  
+          
+            // Global variable 
+            var getCanvas;  
+  
+            $("#btn-Preview-Image").on('click', function() { 
+                html2canvas(element, { 
+                    onrendered: function(canvas) { 
+                        $("#previewImage").append(canvas); 
+                        getCanvas = canvas; 
+                    } 
+                }); 
+            }); 
+  
+            $("#btn-Convert-Html2Image").on('click', function() { 
+                var imgageData =  
+                    getCanvas.toDataURL("image/png"); 
+              
+                // Now browser starts downloading  
+                // it instead of just showing it 
+                var newData = imgageData.replace( 
+                /^data:image\/png/, "data:application/octet-stream"); 
+              
+                $("#btn-Convert-Html2Image").attr( 
+                "download", "strikkia_demo.png").attr( 
+                "href", newData); 
+            }); 
+        });
+		
+		
+    
+
+	</script>
 </body>
 </html>
