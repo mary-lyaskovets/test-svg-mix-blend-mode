@@ -4,8 +4,6 @@
 <title>CSS Template</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
 
 <style>
 	body {oveflow-x: hidden;}
@@ -369,6 +367,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
 	
 <script>
 
+
+	function AddAcript(src_file) {
+		newScript = document.createElement('script');
+		newScript.type = 'text/javascript';
+		newScript.src = src_file;
+		document.getElementsByTagName("head")[0].appendChild(newScript);
+	 }
+	 
+	 AddAcript('https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
+	 AddAcript('https://files.codepedia.info/files/uploads/iScripts/html2canvas.js');
+	 
+	 
+	 
+
 		 function changeColor(newColor1,newColor2,newColor3) {
 			var svgParent = document.getElementById("Layer_1");
 			var st4 = svgParent.getElementsByClassName("st4");
@@ -475,7 +487,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
 		
 		
 		
-		 (function() {
+		 window.onload = function() {
           
             // Global variable 
             var element = jQuery("#img-wrap");  
@@ -505,7 +517,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
                 "download", "strikkia_demo.png").attr( 
                 "href", newData); 
             }); 
-    })();
+    };
 
 	</script>
 </body>
