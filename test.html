@@ -4,13 +4,10 @@
 <title>CSS Template</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src= 
-"https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-    </script> 
-<script src= 
-"https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"> 
-    </script> 
-	<style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
+<script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"/> 
+
+<style>
 	body {oveflow-x: hidden;}
 	.img-wrap {
 		display: inline-block;
@@ -478,24 +475,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
 		
 		
 		
-		 jQuery(document).ready(function($) { 
+		 (function() {
           
             // Global variable 
-            var element = $("#img-wrap");  
+            var element = jQuery("#img-wrap");  
           
             // Global variable 
             var getCanvas;  
   
-            $("#btn-Preview-Image").on('click', function() { 
+            jQuery("#btn-Preview-Image").on('click', function() { 
                 html2canvas(element, { 
                     onrendered: function(canvas) { 
-                        $("#previewImage").append(canvas); 
+                        jQuery("#previewImage").append(canvas); 
                         getCanvas = canvas; 
                     } 
                 }); 
             }); 
   
-            $("#btn-Convert-Html2Image").on('click', function() { 
+            jQuery("#btn-Convert-Html2Image").on('click', function() { 
                 var imgageData =  
                     getCanvas.toDataURL("image/png"); 
               
@@ -504,14 +501,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b2a8a', end
                 var newData = imgageData.replace( 
                 /^data:image\/png/, "data:application/octet-stream"); 
               
-                $("#btn-Convert-Html2Image").attr( 
+                jQuery("#btn-Convert-Html2Image").attr( 
                 "download", "strikkia_demo.png").attr( 
                 "href", newData); 
             }); 
-        });
-		
-		
-    
+    })();
 
 	</script>
 </body>
