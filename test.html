@@ -1211,9 +1211,10 @@
 			 
 			 
 			 
-			 <div id="canvas-div" style='display: inline-block'>
+		<div style='display: inline-block'>
 		<p>canvas</p>
-
+		<div id="canvas-div">
+		</div>
 		</div>
 		
 		<div class="preview-img" style='display: inline-block; outline: 1px solid red;'>
@@ -1273,6 +1274,7 @@
 					
 					
 				html2canvas(document.querySelector("#maskSvg")).then(function(canvas) {
+				document.querySelector("#canvas-div").innerHTML = '';
 					document.querySelector("#canvas-div").appendChild(canvas);
 					
 					var data = canvas.toDataURL('image/png');
